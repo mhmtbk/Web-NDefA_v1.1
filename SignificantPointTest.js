@@ -597,7 +597,7 @@ $("#Velocity_t2t1").click(function () {
     list_Vertical_NewPoint_Boylam_t2t1 = [];
     for (var i = 0; i < new_point_count_t2t1; i++) {
         GenisletmeKatsayisi_t2t1 = 450000;
-        P1PNewPoint_Vertical_t2t1 = (GenisletmeKatsayisi_t2t1 * h_elipsoit_fark_kismi_t2t1[i])
+        P1PNewPoint_Vertical_t2t1 = (GenisletmeKatsayisi_t2t1 * -1 * h_elipsoit_fark_kismi_t2t1[i])
         list_Vertical_AzimutP1P2 = (180)
         elipsoid_1nci_Temel_Odev(listenlem_kısmi_t1_t2t1[i], listboylam_kısmi_t1_t2t1[i], P1PNewPoint_Vertical_t2t1, list_Vertical_AzimutP1P2)
 
