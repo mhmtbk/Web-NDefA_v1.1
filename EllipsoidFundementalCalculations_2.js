@@ -1,5 +1,5 @@
 function elipsoid_2nci_Temel_Odev(P1_Enlem, P1_Boylam, P2_Enlem, P2_Boylam) {
-    //Gauss Ortalama Enlem formulleri kullanarak yapýlmýþtýr. Ýki Nokta arasý 1000m' ye kadar iyi sonuç vermektedir.
+    //Gauss Ortalama Enlem formulleri kullanarak yapÃ½lmÃ½Ã¾tÃ½r. Ãki Nokta arasÃ½ 1000m' ye kadar iyi sonuÃ§ vermektedir.
     //GRS80 elipsoidinin geometrik parametreleri
     var a = 6378137.0;
     var b = 6356752.3141;
@@ -32,7 +32,7 @@ function elipsoid_2nci_Temel_Odev(P1_Enlem, P1_Boylam, P2_Enlem, P2_Boylam) {
     var esitlik_3 = (1 / (24 * (Math.pow(ro_saniye, 2))));
     var esitlik_4 = (1 + nUssuKare - (9 * nUssuKare * Math.pow(t, 2))) / (24 * Math.pow(Buyuk_V, 4) * (Math.pow(ro_saniye, 2)));
     var esitlik_5 = (1 - (2 * nUssuKare)) / (24 * (Math.pow(ro_saniye, 2)));
-    var esitlik_6 = (nUssuKare * (1 - (Math.pow(t, 2)))) / (8 * (Math.pow(Buyuk_V, 4)) * (Math.pow(ro_saniye, 2))); // Bakýlacak
+    var esitlik_6 = (nUssuKare * (1 - (Math.pow(t, 2)))) / (8 * (Math.pow(Buyuk_V, 4)) * (Math.pow(ro_saniye, 2))); // BakÃ½lacak
     var esitlik_7 = (1 + nUssuKare) / (12 * (Math.pow(ro_saniye, 2)));
     var esitlik_8 = (3 + (8 * nUssuKare)) / (24 * (Math.pow(Buyuk_V, 4)) * (Math.pow(ro_saniye, 2)));
 
@@ -59,7 +59,7 @@ function elipsoid_2nci_Temel_Odev(P1_Enlem, P1_Boylam, P2_Enlem, P2_Boylam) {
         azimut_P2_P1 = esitlik_alfa + esitlik_DeltaAlfa_Bolu_2 + 180;
         S_P1_P2 = Math.sqrt(Math.pow(esitlik_A * 3600, 2) + Math.pow(esitlik_B * 3600, 2));
 
-    } else if (Enlem1 > Enlem2 && Boylam1 > Boylam2) { // Tekrar Bakýlacak !!!
+    } else if (Enlem1 > Enlem2 && Boylam1 > Boylam2) {
         azimut_P1_P2 = esitlik_alfa - esitlik_DeltaAlfa_Bolu_2 + 180;
         azimut_P2_P1 = esitlik_alfa + esitlik_DeltaAlfa_Bolu_2;
         S_P1_P2 = Math.sqrt(Math.pow(esitlik_A * 3600, 2) + Math.pow(esitlik_B * 3600, 2));
