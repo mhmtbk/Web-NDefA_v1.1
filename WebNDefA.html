@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <title>3D Deformation Analysis</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Leaflet Drawing Tools Pop Up-->
+    <script src="drawing/leaflet-src.js"></script>
+    <link rel="stylesheet" href="drawing/leaflet.css" />
+
+    <script src="drawing/Leaflet.draw.js"></script>
+    <script src="drawing/Leaflet.Draw.Event.js"></script>
+    <link rel="stylesheet" href="drawing/leaflet.draw.css" />
+
+    <script src="drawing/Toolbar.js"></script>
+    <script src="drawing/Tooltip.js"></script>
+
+    <script src="drawing/ext/GeometryUtil.js"></script>
+    <script src="drawing/ext/LatLngUtil.js"></script>
+    <script src="drawing/ext/LineUtil.Intersect.js"></script>
+    <script src="drawing/ext/Polygon.Intersect.js"></script>
+    <script src="drawing/ext/Polyline.Intersect.js"></script>
+    <script src="drawing/ext/TouchEvents.js"></script>
+
+    <script src="drawing/draw/DrawToolbar.js"></script>
+    <script src="drawing/draw/handler/Draw.Feature.js"></script>
+    <script src="drawing/draw/handler/Draw.SimpleShape.js"></script>
+    <script src="drawing/draw/handler/Draw.Polyline.js"></script>
+    <script src="drawing/draw/handler/Draw.Marker.js"></script>
+    <script src="drawing/draw/handler/Draw.CircleMarker.js"></script>
+    <script src="drawing/draw/handler/Draw.Circle.js"></script>
+    <script src="drawing/draw/handler/Draw.Polygon.js"></script>
+    <script src="drawing/draw/handler/Draw.Rectangle.js"></script>
+
+    <script src="drawing/edit/EditToolbar.js"></script>
+    <script src="drawing/edit/handler/EditToolbar.Edit.js"></script>
+    <script src="drawing/edit/handler/EditToolbar.Delete.js"></script>
+
+    <script src="drawing/Control.Draw.js"></script>
+
+    <script src="drawing/edit/handler/Edit.Poly.js"></script>
+    <script src="drawing/edit/handler/Edit.SimpleShape.js"></script>
+    <script src="drawing/edit/handler/Edit.Marker.js"></script>
+    <script src="drawing/edit/handler/Edit.CircleMarker.js"></script>
+    <script src="drawing/edit/handler/Edit.Circle.js"></script>
+    <script src="drawing/edit/handler/Edit.Rectangle.js"></script>
+    <!-- --------------- -->
+
+    <!-- Polyline Decorator -->
+    <script src="polyline_decorator/dist/leaflet.polylineDecorator.js"></script>
+    <script src="polyline_decorator/example/example.js"></script>
+
+    <!-- Light Slider -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightslider/1.1.3/css/lightslider.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightslider/1.1.3/js/lightslider.min.js"></script>
+    <!-- ------------ -->
+
+    <!-- Leaflet Search -->
+    <link rel="stylesheet" href="leaflet_search/src/leaflet-search.css" />
+    <link rel="stylesheet" href="leaflet_search/style.css" />
+
+    <!-- Leaflet Cluster -->
+    <!-- Print dosyasında -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.Default.css" />
+    <!-- --------------- -->
+
+    <!-- Leaflet Location -->
+    <link rel="stylesheet" href="locate/L.Control.Locate.min.css" />
+    <!-- --------------- -->
+
+    <!-- Leaflet File Layer -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
+    <!-- --------------- -->
+
+    <!-- Leaflet Home_Zoom -->
+    <link rel="stylesheet" href="EasyButton/src/easy-button.css">
+    <script src="EasyButton/src/easy-button.js"></script>
+    <!-- --------------- -->
+
+    <link rel="stylesheet" type="text/css" href="custom.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Ropa+Sans" rel="stylesheet">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <!-- --------------- -->
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <!-- --------------- -->
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <!-- --------------- -->
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <!-- --------------- -->
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Use Font Awesome Free CDN-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
+    <!-- Google Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- --------------- -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.js"></script>
+
+    <!-- Math.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/5.3.0/math.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/5.3.0/math.min.js"></script>
+    <!-- --------------- -->
+
+    <!-- jstat - Calc F Dist-->
+    <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
+    <!-- --------------- -->
+
+    <!-- Elipsoid Üzerinde Temel Ödevler-->
+    <script src="src/ElipsoidTemelOdev1.js"></script>
+    <script src="src/ElipsoidTemelOdev2.js"></script>
+    <!-- --------------- -->
+
+    <!-- UTM-->
+    <script src="src/UTM.js"></script>
+    <!-- --------------- -->
+
+    <!-- Hız vektörü -->
+    <script src="src/leaflet.polylineDecorator.js"></script>
+    <!-- --------------- -->
+
+    <!-- Hata Elipsi -->
+    <script src="src/l.ellipse.js"></script>
+    <!-- --------------- -->
+
+    <!-- Dilim Orta Meridyeni -->
+    <script src="src/DOM.js"></script>
+    <!-- --------------- -->
+
+    <!-- Apex Charts -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <!-- --------------- -->
+
+    <script src="src/icon_script.js"></script>
+
+    <!-- Swal - Alert -->
+    <!--<script src="src/swal.js"></script>-->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@3/dark.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.js"></script>
+    <!--<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>-->
+    <!-- --------------- -->
+
+    <!-- Talas Css-->
+    <link rel="stylesheet" type="text/css" href="src/deformation_analysis_css.css">
+</head>
+
+<body>
+
+    <!-- The Modal -->
+    <div id="myModalHome" class="modalHome">
+        <!-- Modal content -->
+        <div class="modalHome-content">
+            <div class="modalHome-header">
+                <span class="close_ModalHome">&times;</span>
+                <h2  style="color:white">User Guide | Web-NDefA: Web-'N'etwork 'Def'ormation 'A'nalysis</h2>
+            </div>
+            <div class="modalHome-body">
+                <p>Please read the terms of use carefully before using our site.</p>
+                <ul class="a">
+                    <li>This site is a web-based open-source platform (Web-NDefA) developed for the determination of deformations in geodetic networks, which are periodically monitored with GNSS observations, with static model and S-Transformation matrix method for easy access to GNSS-based deformation analysis studies.</li>
+                    <li>The information and documents submitted as a result of the inquiry are for informational purposes only. It cannot be used for official transactions and commercial purposes. In case of misuse, all responsibility belongs to the people who use it inappropriately.</li>
+                    <li>Users cannot in any way claim that they have suffered damage due to incorrect information on the site.</li>
+                    <li>The admin reserves the right to change or terminate the content of the site or any service provided to users at any time.</li>
+                    <li>The admin is working to make the site accessible. However, it is not responsible for the inaccessibility of the site for various reasons.</li>
+                    <li>For the Web-NDefA Application to work, the baseline solution files of a GNSS-based geodetic network must be uploaded to the platform in <u>.asc or .txt</u> format.</li>
+                    <li>The file to be uploaded to the platform is user-defined and the keywords and information in the file are given below.</li>
+
+                    <ul class="">
+                        <li>@+ Individual baseline information (Reference point of baseline and its coordinates).</li>
+                        <li>@- Baseline vector components.</li>
+                        <li>@= Variance-covariance information for baseline vector.</li>
+                        <li>REF: Reference point and coordinates.</li>
+                        <li>MEAN: Rover point and coordinates.</li>
+                    </ul>
+                    <li>The template baseline solution file can be downloaded from the platform.</li>
+                </ul>
+            </div>
+
+            <div class="modal-footer_Modal">
+                <button class="button_Modal button1_Modal" data-dismiss="modal"; style="font-weight: bold">Ok.</button>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Web-NDefA | 3D Static Deformation Analysis</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="section_1">
+        <div class="container">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#menu_t1">Epoch t<sub>1</sub></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#menu_t2">Epoch t<sub>2</sub></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#menu_t3">Epoch t<sub>3</sub></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#menu_analiz">Analysis</a>
+                </li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div id="menu_t1" class="container tab-pane active"><br>
+                    <h5 style="padding-bottom: 20px; text-align: center">Adjustment of GNSS Networks</h5>
+                    <ol class="numbered">
+                        <li>
+                            <h6 id="upload">Upload File</h6><br>
+                            <a href="template_data/template.txt" download="template.txt">
+                                <button class="button_upload button_upload_1" type="button">Download Template Data</button>
+                            </a>
+                            <input type="file" id="openselect" title="Choose a specific .asc or .txt file please" /><label id="fileLabel" style="margin-left: 05px">Import Baseline Solution File (ASCII, TXT)</label>
+                            <!--accept='.txt'-->
+                            <textarea id="showresult"></textarea>
+                            <button type="button" id="myButtonControlID" class="btn btn-outline-success" disabled> <i class="fa fa-file-excel-o"></i> Export XYZ</button>
+                            <label id="b_line_vectors_1" class="container_baseline">Hide Base Line Vectors
+                                <input id="baseline_vectors_1" type="checkbox" name="baseline_t1" disabled>
+                                <span id="BazGizle_t1" class="checkmark_baseline" name="baseline"></span>
+                            </label>
+                            <br>
+                            <label id="cartesian_points_t1" class="container_baseline">Hide Measured Points
+                                <input id="kartezyen_noktalar_t1" type="checkbox" name="cartesian_t1">
+                                <span id="BazGizle_t1" class="checkmark_baseline" name="baseline"></span>
+                            </label>
+                        </li>
+
+                        <li>
+                            <h6>Free Adjustment</h6>
+                            <!-- Select Wide Zones and Central Merian -->
+                            <div id="WideZones_t1_div">
+                                <p class="velocity_p">Select Wide Zones And Central Meridian</p>
+                                <br>
+                                <label id="DOM_CM" class="container_baseline" style="margin-top: -5px; margin-bottom: 5px">Open/Close Central Meridians
+                                    <input type="checkbox" name="DOM_CM_t1" disabled>
+                                    <span id="BazGizle_t1" class="checkmark_baseline" name="baseline"></span>
+                                </label>
+                                <div class="dropdown_UTM" style="margin-left: 0px;">
+                                    <select id="WZ_t1" class="dropdown_UTM-t" disabled>
+                                        <option value="None" selected>Wide Zones</option>
+                                        <option value="WZ_t1_3">3 Degrees</option>
+                                        <option value="WZ_t1_6">6 Degrees</option>
+                                    </select>
+                                </div>
+                                <div class="dropdown_UTM" style="margin-left: 10px;">
+                                    <select id="CM_t1" class="dropdown_UTM-t" disabled>
+                                        <option value="None" selected>Central Meridian</option>
+                                        <option value="CM_t1_1">27 Degrees</option>
+                                        <option value="CM_t1_2">30 Degrees</option>
+                                        <option value="CM_t1_3">33 Degrees</option>
+                                        <option value="CM_t1_4">36 Degrees</option>
+                                        <option value="CM_t1_5">39 Degrees</option>
+                                        <option value="CM_t1_6">42 Degrees</option>
+                                        <option value="CM_t1_7">45 Degrees</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!--Free Adjustment -->
+                            <button type="button" id="tumizdeng" class="btn btn-outline-success" style="margin-bottom: 15px" disabled>Perform Free Adjustment</button>
+                            <br>
+                            <button type="button" id="myButtonControlID4" class="btn btn-outline-success" style="margin-bottom: 0px" disabled> <i class="fa fa-file-excel-o"></i> Export Adjusted Coordinates</button>
+                            <br>
+                            <button type="button" id="myButtonControlID5" class="btn btn-outline-success" style="margin-bottom: 15px" disabled> <i class="fa fa-file-excel-o"></i> Checking Adjusted Measurements</button>
+
+                            <label id="adjusted_points_t1" class="container_baseline">Hide Adjusted Points
+                                <input id="dengeli_noktalar_t1" type="checkbox" name="adjusted_t1">
+                                <span id="BazGizle_t1" class="checkmark_baseline" name="baseline"></span>
+                            </label>
+
+                            <div id="divTableDataHolder">
+                                <table id="TableA">
+                                    <tr>
+                                        <th align="center" ; colspan="7">Cartesian Coordinates</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Point Name</th>
+                                        <th>X(m)</th>
+                                        <th>Y(m)</th>
+                                        <th>Z(m)</th>
+                                        <th>Latitude</th>
+                                        <th>Longitude</th>
+                                        <th>Ellipsoid Height (m)</th>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <div id="divTableDataHolder2">
+                                <!-- Unconstrained Adjustment - Adjusted Coordinates and Mean Errors -->
+                                <table id="TableB">
+                                    <tr>
+                                        <th align="center" ; colspan="7">Adjusted Coordinates and Mean Errors</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Point Name</th>
+                                        <th>X(m)</th>
+                                        <th>Y(m)</th>
+                                        <th>Z(m)</th>
+                                        <th>mx(m)</th>
+                                        <th>my(m)</th>
+                                        <th>mz(m)</th>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <div id="divTableDataHolder3">
+                                <!-- Unconstrained Adjustment - Control Adjusted Measurements -->
+                                <table id="TableC">
+                                    <tr>
+                                        <th align="center" ; colspan="4">Dengeli Ölçülerin Denetimi</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Point Name</th>
+                                        <th>Dengeli Baz Olculeri</th>
+                                        <th>Dengeli Koordinat Farkları</th>
+                                        <th>Fark</th>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <div id="divTableDataHolder4">
+                                <!-- Free Adjustment - Adjusted Coordinates and Mean Errors -->
+                                <table id="TableD">
+                                    <tr>
+                                        <th align="center" ; colspan="12">Adjusted Coordinates and Mean Errors</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Point Name</th>
+                                        <th>X(m)</th>
+                                        <th>Y(m)</th>
+                                        <th>Z(m)</th>
+                                        <th>mx(m)</th>
+                                        <th>my(m)</th>
+                                        <th>mz(m)</th>
+                                        <th>Latitude</th>
+                                        <th>Longitude</th>
+                                        <th>Ellipsoid Height (m)</th>
+                                        <th>Easting (m)</th>
+                                        <th>Northing (m)</th>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <div id="divTableDataHolder5">
+                                <!-- Free Adjustment - Control Adjusted Measurements -->
+                                <table id="TableE">
+                                    <tr>
+                                        <th align="center" ; colspan="5">Checking Adjusted Measurements</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Point Name</th>
+                                        <th>Adjusted Baseline Measurements</th>
+                                        <th>Adjusted Coordinate Differences</th>
+                                        <th>Difference</th>
+                                        <th>Check</th>
+                                    </tr>
+                                </table>
+                            </div>
+                        </li>
+
+                        <li id="zorlamasiz_deng_t1">
+                            <h6>Unconstrained Adjustment</h6>
+                            <div class="dropdown">
+                                <select id="Sta" name="StaChoice" class="dropdown-select">
+                                    <option value="">Select Fixed Point</option>
+                                </select>
+                            </div>
+                            <button type="button" id="zorlamasizdeng" class="btn btn-outline-success" onclick="ZorlamasizDeng()" disabled>Perform Network Adjustment by Unconstrained</button>
+                            <br>
+                            <button type="button" id="myButtonControlID2" class="btn btn-outline-success" style="margin-bottom: 15px" disabled> <i class="fa fa-file-excel-o"></i> Export Adjusted Coordinates</button>
+                            <br>
+                            <button type="button" id="myButtonControlID3" class="btn btn-outline-success" style="margin-bottom: 15px" disabled> <i class="fa fa-file-excel-o"></i> Checking Adjusted Measurements</button>
+                        </li>
+
+                        <li>
+                            <h6 style="margin-top: px">Reliability Criteria</h6>
+                            <button type="button" id="ExportRedundans_t1" class="btn btn-outline-success" style="margin-bottom: 15px" disabled> <i class="fa fa-file-excel-o"></i> Export Redundant Part</button>
+                            <div id="divTableDataHolder_Redundans">
+                                <table id="Table_Redundans">
+                                    <tr>
+                                        <th align="center" ; colspan="3">Redundant Parts</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Base Vectors</th>
+                                        <th>ri</th>
+                                        <th>Comment</th>
+                                    </tr>
+                                </table>
+                            </div>
+                            <br>
+                            <button type="button" id="ExportIcDisGuven_t1" class="btn btn-outline-success" style="margin-bottom: 15px" disabled> <i class="fa fa-file-excel-o"></i> Export Internal and External Reliability Criteria</button>
+                            <br>
+                            <div id="divTableDataHolder_IcDisGuven_t1">
+                                <table id="Table_IcDisGuven_t1">
+                                    <tr>
+                                        <th align="center" ; colspan="5">Internal and External Reliability Criteria</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Base Vectors</th>
+                                        <th>Internal Reliability Criteria</th>
+                                        <th>Comment</th>
+                                        <th>External Reliability Criteria</th>
+                                        <th>Comment</th>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <button type="button" id="UyusumsuzOlcu_t1" class="btn btn-outline-success" style="margin-bottom: 15px" disabled> <i class="fa fa-file-excel-o"></i> Export Outlier</button>
+                            <br>
+
+                            <div id="divTableDataHolder_Uyusumsuz_t1">
+                                <table id="Table_Uyusumsuz_t1">
+                                    <tr>
+                                        <th align="center" ; colspan="3">Outlier Test</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Base Vectors</th>
+                                        <th>Size of The Test (POPE Test)</th>
+                                        <th>Result</th>
+                                    </tr>
+                                </table>
+                            </div>
+                            <script src="src/session1_script.js"></script>
+                        </li>
+                    </ol>
+                </div>
+                <div id="menu_t2" class="container tab-pane fade"><br>
+                    <h5 style="padding-bottom: 20px; text-align: center">Adjustment of GNSS Networks</h5>
+                    <ol class="numbered">
+                        <li>
+                            <h6 id="upload">Upload File</h6><br>
+                            <a href="template_data/template.asc" download="template.asc">
+                                <button class="button_upload button_upload_1" type="button">Download Template Data</button>
+                            </a>
+                            <input type="file" id="openselect_t2" title="Choose a specific .asc or .txt file please" /><label id="fileLabel_t2" style="margin-left: 05px">Import Baseline Solution File (ASCII, TXT)</label>
+                            <textarea id="showresult_2"></textarea>
+                            <button type="button" id="KartezyenControlID_2" class="btn btn-outline-success" disabled> <i class="fa fa-file-excel-o"></i> Export XYZ</button>
+                            <label id="b_line_vectors_2" class="container_baseline">Hide Base Line Vectors
+                                <input id="baseline_vectors_2" type="checkbox" name="baseline_t2" disabled>
+                                <span id="BazGizle_t2" class="checkmark_baseline" name="baseline"></span>
+                            </label>
+                            <br>
+                            <label id="cartesian_points_t2" class="container_baseline">Hide Measured Points
+                                <input id="kartezyen_noktalar_t2" type="checkbox" name="cartesian_t2">
+                                <span id="BazGizle_t2" class="checkmark_baseline" name="baseline"></span>
+                            </label>
+                        </li>
+                        <li>
+                            <h6>Free Adjustment</h6>
+
+
+
+                            <!-- Select Wide Zones and Central Merian -->
+                            <div id="WideZones_t2_div">
+                                <p class="velocity_p">Select Wide Zones And Central Meridian</p>
+                                <br>
+                                <label id="DOM_CM" class="container_baseline" style="margin-top: -5px; margin-bottom: 5px">Open/Close Central Meridians
+                                    <input type="checkbox" name="DOM_CM_t2" disabled>
+                                    <span id="BazGizle_t1" class="checkmark_baseline" name="baseline"></span>
+                                </label>
+                                <div class="dropdown_UTM" style="margin-left: 0px;">
+                                    <select id="WZ_t2" class="dropdown_UTM-t" disabled>
+                                        <option value="None" selected>Wide Zones</option>
+                                        <option value="WZ_t2_3">3 Degrees</option>
+                                        <option value="WZ_t2_6">6 Degrees</option>
+                                    </select>
+                                </div>
+                                <div class="dropdown_UTM" style="margin-left: 10px;">
+                                    <select id="CM_t2" class="dropdown_UTM-t" disabled>
+                                        <option value="None" selected>Central Meridian</option>
+                                        <option value="CM_t2_1">27 Degrees</option>
+                                        <option value="CM_t2_2">30 Degrees</option>
+                                        <option value="CM_t2_3">33 Degrees</option>
+                                        <option value="CM_t2_4">36 Degrees</option>
+                                        <option value="CM_t2_5">39 Degrees</option>
+                                        <option value="CM_t2_6">42 Degrees</option>
+                                        <option value="CM_t2_7">45 Degrees</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+
+                            <button type="button" id="tumizdeng_2" class="btn btn-outline-success" style="margin-bottom: 15px" disabled>Perform Free Adjustment</button>
+                            <br>
+                            <button type="button" id="ExportTumIzDengControlID2" class="btn btn-outline-success" style="margin-bottom: 0px" disabled> <i class="fa fa-file-excel-o"></i> Export Adjusted Coordinates</button>
+                            <br>
+                            <button type="button" id="ExportTumIzDengDentControlID2" class="btn btn-outline-success" style="margin-bottom: 15px" disabled> <i class="fa fa-file-excel-o"></i> Checking Adjusted Measurements</button>
+
+                            <label id="adjusted_points_t2" class="container_baseline">Hide Adjusted Points
+                                <input id="dengeli_noktalar_t2" type="checkbox" name="adjusted_t2">
+                                <span id="BazGizle_t1" class="checkmark_baseline" name="baseline"></span>
+                            </label>
+
+                            <br>
+                            <div id="divTableDataHolder_2">
+                                <table id="TableA_2">
+                                    <tr>
+                                        <th align="center" ; colspan="7">Cartesian Coordinates</th>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Point Name</th>
+                                        <th>X(m)</th>
+                                        <th>Y(m)</th>
+                                        <th>Z(m)</th>
+                                        <th>Latitude</th>
+                                        <th>Longitude</th>
+                                        <th>Ellipsoid Height (m)</th>
+                                    </tr>
+
+                                </table>
+                            </div>
+
+                            <div id="divTableDataHolder2_2">
+                                <!-- Zorlamasız Deng. - Adjusted Coordinates and Mean Errors -->
+                                <table id="TableB_2">
+                                    <tr>
+                                        <th align="center" ; colspan="7">Adjusted Coordinates and Mean Errors</th>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Point Name</th>
+                                        <th>X(m)</th>
+                                        <th>Y(m)</th>
+                                        <th>Z(m)</th>
+                                        <th>mx(m)</th>
+                                        <th>my(m)</th>
+                                        <th>mz(m)</th>
+                                    </tr>
+
+                                </table>
+                            </div>
+
+                            <div id="divTableDataHolder3_2">
+                                <!-- Zorlamasız Deng. - Dengeli Ölçüler Denetimi -->
+                                <table id="TableC_2">
+                                    <tr>
+                                        <th align="center" ; colspan="4">Dengeli Ölçülerin Denetimi</th>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Point Name</th>
+                                        <th>Dengeli Baz Olculeri</th>
+                                        <th>Dengeli Koordinat Farkları</th>
+                                        <th>Fark</th>
+                                    </tr>
+
+                                </table>
+                            </div>
+
+                            <div id="divTableDataHolder4_2">
+                                <!-- Tüm-İz Minimum Deng. - Adjusted Coordinates and Mean Errors -->
+                                <table id="TableD_2">
+                                    <tr>
+                                        <th align="center" ; colspan="12">Adjusted Coordinates and Mean Errors</th>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Point Name</th>
+                                        <th>X(m)</th>
+                                        <th>Y(m)</th>
+                                        <th>Z(m)</th>
+                                        <th>mx(m)</th>
+                                        <th>my(m)</th>
+                                        <th>mz(m)</th>
+                                        <th>Latitude</th>
+                                        <th>Longitude</th>
+                                        <th>Ellipsoid Height (m)</th>
+                                        <th>Easting (m)</th>
+                                        <th>Northing (m)</th>
+                                    </tr>
+
+                                </table>
+                            </div>
+
+                            <div id="divTableDataHolder5_2">
+                                <!-- Tüm-İz Minimum Deng. - Dengeli Ölçüler Denetimi -->
+                                <table id="TableE_2">
+                                    <tr>
+                                        <th align="center" ; colspan="5">Checking Adjusted Measurements</th>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Point Name</th>
+                                        <th>Adjusted Baseline Measurements</th>
+                                        <th>Adjusted Coordinate Differences</th>
+                                        <th>Difference</th>
+                                        <th>Check</th>
+                                    </tr>
+
+                                </table>
+                            </div>
+
+                            <script src="src/session2_script.js"></script>
+                        </li>
+                        <li id="zorlamasiz_deng_t2">
+                            <h6>Unconstrained Adjustment</h6>
+                            <div class="dropdown">
+                                <select id="Sta_t2" name="StaChoice" class="dropdown-select_t2">
+                                    <option value="">Select Fixed Point</option>
+                                </select>
+                            </div>
+
+                            <button type="button" id="zorlamasizdeng_2" class="btn btn-outline-success" onclick="ZorlamasizDeng()" disabled>Perform Network Adjustment by Unconstrained</button>
+                            <br>
+                            <button type="button" id="ExportDengControlID2" class="btn btn-outline-success" style="margin-bottom: 15px" disabled> <i class="fa fa-file-excel-o"></i> Export Adjusted Coordinates</button>
+                            <br>
+                            <button type="button" id="ExportDengDentControlID2" class="btn btn-outline-success" style="margin-bottom: 15px" disabled> <i class="fa fa-file-excel-o"></i> Checking Adjusted Measurements</button>
+                        </li>
+                        <li>
+                            <h6>Reliability Criteria</h6>
+
+                            <button type="button" id="ExportRedundans_t2" class="btn btn-outline-success" style="margin-bottom: 15px" disabled> <i class="fa fa-file-excel-o"></i> Export Redundant Part</button>
+
+                            <div id="divTableDataHolder_Redundans_t2">
+                                <!-- Redundans Payları Kontrolü -->
+                                <table id="Table_Redundans_t2">
+                                    <tr>
+                                        <th align="center" ; colspan="3">Redundant Parts</th>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Base Vectors</th>
+                                        <th>ri</th>
+                                        <th>Comment</th>
+                                    </tr>
+
+                                </table>
+                            </div>
+                            <br>
+
+                            <button type="button" id="ExportIcDisGuven_t2" class="btn btn-outline-success" style="margin-bottom: 15px" disabled> <i class="fa fa-file-excel-o"></i> Export Internal and External Reliability Criteria</button>
+
+                            <div id="divTableDataHolder_IcDisGuven_t2">
+                                <!-- İç ve Dış Reliability Criteria -->
+                                <table id="Table_IcDisGuven_t2">
+                                    <tr>
+                                        <th align="center" ; colspan="5">Internal and External Reliability Criteria</th>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Base Vectors</th>
+                                        <th>Internal Reliability Criteria</th>
+                                        <th>Comment</th>
+                                        <th>External Reliability Criteria</th>
+                                        <th>Comment</th>
+                                    </tr>
+
+                                </table>
+                            </div>
+                            <br>
+
+                            <button type="button" id="UyusumsuzOlcu_t2" class="btn btn-outline-success" style="margin-bottom: 15px" disabled> <i class="fa fa-file-excel-o"></i> Export Outlier</button>
+
+                            <div id="divTableDataHolder_Uyusumsuz_t2">
+                                <!-- İç ve Dış Reliability Criteria -->
+                                <table id="Table_Uyusumsuz_t2">
+                                    <tr>
+                                        <th align="center" ; colspan="3">Outlier Test</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Base Vectors</th>
+                                        <th>Size of The Test (POPE Test)</th>
+                                        <th>Result</th>
+                                    </tr>
+
+                                </table>
+                            </div>
+                            <br>
+
+                        </li>
+                    </ol>
+                </div>
+                <div id="menu_t3" class="container tab-pane fade"><br>
+                    <h5 style="padding-bottom: 20px; text-align: center">Adjustment of GNSS Networks</h5>
+                    <ol class="numbered">
+                        <li>
+                            <h6 id="upload">Upload File</h6><br>
+                            <a href="template_data/template.asc" download="template.asc">
+                                <button class="button_upload button_upload_1" type="button">Download Template Data</button>
+                            </a>
+                            <input type="file" id="openselect_t3" title="Choose a specific .asc or .txt file please" /><label id="fileLabel_t3" style="margin-left: 05px">Import Baseline Solution File (ASCII, TXT)</label>
+                            <textarea id="showresult_3"></textarea>
+                            <button type="button" id="KartezyenControlID_3" class="btn btn-outline-success" disabled> <i class="fa fa-file-excel-o"></i> Export XYZ</button>
+                            <label id="b_line_vectors_3" class="container_baseline">Hide Base Line Vectors
+                                <input id="baseline_vectors_3" type="checkbox" name="baseline_t3" disabled>
+                                <span id="BazGizle_t3" class="checkmark_baseline" name="baseline"></span>
+                            </label>
+                            <br>
+
+                            <label id="cartesian_points_t3" class="container_baseline">Hide Measured Points
+                                <input id="kartezyen_noktalar_t3" type="checkbox" name="cartesian_t3">
+                                <span id="BazGizle_t3" class="checkmark_baseline" name="baseline"></span>
+                            </label>
+                        </li>
+                        <li>
+                            <h6>Free Adjustment</h6>
+
+
+
+                            <!-- Select Wide Zones and Central Merian -->
+                            <div id="WideZones_t3_div">
+                                <p class="velocity_p">Select Wide Zones And Central Meridian</p>
+                                <br>
+                                <label id="DOM_CM" class="container_baseline" style="margin-top: -5px; margin-bottom: 5px">Open/Close Central Meridians
+                                    <input type="checkbox" name="DOM_CM_t3" disabled>
+                                    <span id="BazGizle_t1" class="checkmark_baseline" name="baseline"></span>
+                                </label>
+                                <div class="dropdown_UTM" style="margin-left: 0px;">
+                                    <select id="WZ_t3" class="dropdown_UTM-t" disabled>
+                                        <option value="None" selected>Wide Zones</option>
+                                        <option value="WZ_t3_3">3 Degrees</option>
+                                        <option value="WZ_t3_6">6 Degrees</option>
+                                    </select>
+                                </div>
+                                <div class="dropdown_UTM" style="margin-left: 10px;">
+                                    <select id="CM_t3" class="dropdown_UTM-t" disabled>
+                                        <option value="None" selected>Central Meridian</option>
+                                        <option value="CM_t3_1">27 Degrees</option>
+                                        <option value="CM_t3_2">30 Degrees</option>
+                                        <option value="CM_t3_3">33 Degrees</option>
+                                        <option value="CM_t3_4">36 Degrees</option>
+                                        <option value="CM_t3_5">39 Degrees</option>
+                                        <option value="CM_t3_6">42 Degrees</option>
+                                        <option value="CM_t3_7">45 Degrees</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+
+                            <button type="button" id="tumizdeng_3" class="btn btn-outline-success" style="margin-bottom: 15px" disabled>Perform Free Adjustment</button>
+                            <br>
+                            <button type="button" id="ExportTumIzDengControlID3" class="btn btn-outline-success" style="margin-bottom: 0px" disabled> <i class="fa fa-file-excel-o"></i> Export Adjusted Coordinates</button>
+                            <br>
+                            <button type="button" id="ExportTumIzDengDentControlID3" class="btn btn-outline-success" style="margin-bottom: 15px" disabled> <i class="fa fa-file-excel-o"></i> Checking Adjusted Measurements</button>
+
+                            <label id="adjusted_points_t3" class="container_baseline">Hide Adjusted Points
+                                <input id="dengeli_noktalar_t3" type="checkbox" name="adjusted_t3">
+                                <span id="BazGizle_t1" class="checkmark_baseline" name="baseline"></span>
+                            </label>
+
+                            <br>
+                            <div id="divTableDataHolder_3">
+                                <table id="TableA_3">
+                                    <tr>
+                                        <th align="center" ; colspan="7">Cartesian Coordinates</th>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Point Name</th>
+                                        <th>X(m)</th>
+                                        <th>Y(m)</th>
+                                        <th>Z(m)</th>
+                                        <th>Latitude</th>
+                                        <th>Longitude</th>
+                                        <th>Ellipsoid Height (m)</th>
+                                    </tr>
+
+                                </table>
+                            </div>
+
+                            <div id="divTableDataHolder2_3">
+                                <!-- Zorlamasız Deng. - Adjusted Coordinates and Mean Errors -->
+                                <table id="TableB_3">
+                                    <tr>
+                                        <th align="center" ; colspan="7">Adjusted Coordinates and Mean Errors</th>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Point Name</th>
+                                        <th>X(m)</th>
+                                        <th>Y(m)</th>
+                                        <th>Z(m)</th>
+                                        <th>mx(m)</th>
+                                        <th>my(m)</th>
+                                        <th>mz(m)</th>
+                                    </tr>
+
+                                </table>
+                            </div>
+
+                            <div id="divTableDataHolder3_3">
+                                <!-- Zorlamasız Deng. - Dengeli Ölçüler Denetimi -->
+                                <table id="TableC_3">
+                                    <tr>
+                                        <th align="center" ; colspan="4">Dengeli Ölçülerin Denetimi</th>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Point Name</th>
+                                        <th>Dengeli Baz Olculeri</th>
+                                        <th>Dengeli Koordinat Farkları</th>
+                                        <th>Fark</th>
+                                    </tr>
+
+                                </table>
+                            </div>
+
+                            <div id="divTableDataHolder4_3">
+                                <!-- Tüm-İz Minimum Deng. - Adjusted Coordinates and Mean Errors -->
+                                <table id="TableD_3">
+                                    <tr>
+                                        <th align="center" ; colspan="12">Adjusted Coordinates and Mean Errors</th>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Point Name</th>
+                                        <th>X(m)</th>
+                                        <th>Y(m)</th>
+                                        <th>Z(m)</th>
+                                        <th>mx(m)</th>
+                                        <th>my(m)</th>
+                                        <th>mz(m)</th>
+                                        <th>Latitude</th>
+                                        <th>Longitude</th>
+                                        <th>Ellipsoid Height (m)</th>
+                                        <th>Easting (m)</th>
+                                        <th>Northing (m)</th>
+                                    </tr>
+
+                                </table>
+                            </div>
+
+                            <div id="divTableDataHolder5_3">
+                                <!-- Tüm-İz Minimum Deng. - Dengeli Ölçüler Denetimi -->
+                                <table id="TableE_3">
+                                    <tr>
+                                        <th align="center" ; colspan="5">Checking Adjusted Measurements</th>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Point Name</th>
+                                        <th>Adjusted Baseline Measurements</th>
+                                        <th>Adjusted Coordinate Differences</th>
+                                        <th>Difference</th>
+                                        <th>Check</th>
+                                    </tr>
+
+                                </table>
+                            </div>
+
+                            <script src="src/session3_script.js"></script>
+                        </li>
+                        <li id="zorlamasiz_deng_t3">
+                            <h6>Unconstrained Adjustment</h6>
+                            <div class="dropdown">
+                                <select id="Sta_t3" name="StaChoice" class="dropdown-select_t3">
+                                    <option value="">Select Fixed Point</option>
+                                </select>
+                            </div>
+
+                            <button type="button" id="zorlamasizdeng_3" class="btn btn-outline-success" onclick="ZorlamasizDeng()" disabled>Perform Network Adjustment by Unconstrained</button>
+                            <br>
+                            <button type="button" id="ExportDengControlID3" class="btn btn-outline-success" style="margin-bottom: 15px" disabled> <i class="fa fa-file-excel-o"></i> Export Adjusted Coordinates</button>
+                            <br>
+                            <button type="button" id="ExportDengDentControlID3" class="btn btn-outline-success" style="margin-bottom: 15px" disabled> <i class="fa fa-file-excel-o"></i> Checking Adjusted Measurements</button>
+                        </li>
+                        <li>
+                            <h6>Reliability Criteria</h6>
+
+                            <button type="button" id="ExportRedundans_t3" class="btn btn-outline-success" style="margin-bottom: 15px" disabled> <i class="fa fa-file-excel-o"></i> Export Redundant Part </button>
+
+                            <div id="divTableDataHolder_Redundans_t3">
+                                <!-- Redundans Payları Kontrolü -->
+                                <table id="Table_Redundans_t3">
+                                    <tr>
+                                        <th align="center" ; colspan="3">Redundant Parts</th>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Base Vectors</th>
+                                        <th>ri</th>
+                                        <th>Comment</th>
+                                    </tr>
+
+                                </table>
+                            </div>
+                            <br>
+
+                            <button type="button" id="ExportIcDisGuven_t3" class="btn btn-outline-success" style="margin-bottom: 15px" disabled> <i class="fa fa-file-excel-o"></i> Export Internal and External Reliability Criteria </button>
+
+                            <div id="divTableDataHolder_IcDisGuven_t3">
+                                <!-- İç ve Dış Reliability Criteria -->
+                                <table id="Table_IcDisGuven_t3">
+                                    <tr>
+                                        <th align="center" ; colspan="5">Internal and External Reliability Criteria</th>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Base Vectors</th>
+                                        <th>Internal Reliability Criteria</th>
+                                        <th>Comment</th>
+                                        <th>External Reliability Criteria</th>
+                                        <th>Comment</th>
+                                    </tr>
+
+                                </table>
+                            </div>
+                            <br>
+
+                            <button type="button" id="UyusumsuzOlcu_t3" class="btn btn-outline-success" style="margin-bottom: 15px" disabled> <i class="fa fa-file-excel-o"></i> Export Outlier</button>
+
+                            <div id="divTableDataHolder_Uyusumsuz_t3">
+                                <!-- İç ve Dış Reliability Criteria -->
+                                <table id="Table_Uyusumsuz_t3">
+                                    <tr>
+                                        <th align="center" ; colspan="3">Outlier Test</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Base Vectors</th>
+                                        <th>Size of The Test (POPE Test)</th>
+                                        <th>Result</th>
+                                    </tr>
+
+                                </table>
+                            </div>
+                            <br>
+
+                        </li>
+                    </ol>
+                </div>
+                <div id="menu_analiz" class="container tab-pane fade"><br>
+                    <h5 style="padding-bottom: 20px; text-align: center">Deformation Analysis</h5>
+                    <ol class="numbered">
+                        <li>
+                            <h6>Select Periods To Compare</h6><br>
+                            <div class="dropdown_analysis">
+                                <select id="periods" name="StaChoice" class="dropdown-select_analysis">
+                                    <option value="0">Periods</option>
+                                    <option value="1">t<sub>1</sub> Time and t<sub>2</sub> Time</option>
+                                    <option value="2">t<sub>1</sub> Time and t<sub>3</sub> Time</option>
+                                    <option value="3">t<sub>2</sub> Time and t<sub>3</sub> Time</option>
+                                </select>
+                            </div>
+                        </li>
+                        <li>
+                            <h6>Static Deformation Analysis</h6>
+                            <button type="button" id="GlobalTest" class="btn btn-outline-success" style="margin-bottom: 0px; margin-top: 15px" disabled>Global Test</button>
+
+                            <button type="button" id="GlobalTest_t2t1" class="btn btn-outline-success" style="margin-bottom: 0px; margin-top: 15px">Global Test <sub>(t2-t1)</sub></button>
+                            <button type="button" id="GlobalTest_t3t1" class="btn btn-outline-success" style="margin-bottom: 0px; margin-top: 15px">Global Test <sub>(t3-t1)</sub></button>
+                            <button type="button" id="GlobalTest_t3t2" class="btn btn-outline-success" style="margin-bottom: 0px; margin-top: 15px">Global Test <sub>(t3-t2)</sub></button>
+
+                            <br>
+                            <button type="button" id="DatumNokta_t2t1" class="btn btn-outline-success" style="margin-top: 15px; margin-bottom: 15px">Identify Static Datum Points <sub>(t2-t1)</sub></button>
+                            <button type="button" id="DatumNokta_t3t1" class="btn btn-outline-success" style="margin-top: 15px; margin-bottom: 15px">Identify Static Datum Points <sub>(t3-t1)</sub></button>
+                            <button type="button" id="DatumNokta_t3t2" class="btn btn-outline-success" style="margin-top: 15px; margin-bottom: 15px">Identify Static Datum Points <sub>(t3-t2)</sub></button>
+
+                            <button type="button" id="DeformationTest_t2t1" class="btn btn-outline-success" style="margin-bottom: 15px">Significance Test For Deformation Magnitudes <sub>(t2-t1)</sub></button>
+                            <button type="button" id="DeformationTest_t3t1" class="btn btn-outline-success" style="margin-bottom: 15px">Significance Test For Deformation Magnitudes <sub>(t3-t1)</sub></button>
+                            <button type="button" id="DeformationTest_t3t2" class="btn btn-outline-success" style="margin-bottom: 15px">Significance Test For Deformation Magnitudes <sub>(t3-t2)</sub></button>
+                            <br>
+                            <button type="button" id="ExportSgnfTest" class="btn btn-outline-success" style="margin-bottom: 15px"> <i class="fa fa-file-excel-o"></i> Export Significance Test Results to Excel</button>
+
+                            <div id="divTableDataHolder_Sgnf_Analysis_t2t1">
+                                <table id="TableSgnf_t2t1">
+                                    <tr>
+                                        <th id="Sgnf_t2t1Capt" align="center" ; colspan="4">Significance Test Results</th>
+                                    </tr>
+
+                                    <tr>
+                                        <th id="sgnf_PN">Point Name</th>
+                                        <th id="sgnf_T">Test Value</th>
+                                        <th id="sgnf_F">F Value</th>
+                                        <th id="fark_Com">Comment</th>
+                                    </tr>
+
+                                </table>
+                            </div>
+                        </li>
+                        <li>
+                            <h6 style="margin-top: -20px; padding-bottom: 0px;">Transactions Between Periods</h6>
+                            <button data-toggle="modal" data-target="#myModal" type="button" id="CoordDifference" class="btn btn-outline-success" style="margin-bottom: 15px; margin-top: 15px" disabled>Show Coordinate Differences</button>
+                            <br>
+                            <button type="button" id="ExportCoordDifference" class="btn btn-outline-success" style="margin-bottom: 15px" disabled> <i class="fa fa-file-excel-o"></i> Export Coordinate Differences</button>
+                            <button type="button" id="ExportCoordDifference_t3t1" class="btn btn-outline-success" style="margin-bottom: 15px"> <i class="fa fa-file-excel-o"></i> Export Coordinate Differences <sub>(t3-t1)</sub></button>
+                            <button type="button" id="ExportCoordDifference_t3t2" class="btn btn-outline-success" style="margin-bottom: 15px"> <i class="fa fa-file-excel-o"></i> Export Coordinate Differences <sub>(t3-t2)</sub></button>
+                            <br>
+
+                            <div id="divTableDataHolder_CoorDiff">
+                                <table id="TableDiff">
+                                    <tr>
+                                        <th id="farkCapt" align="center" ; colspan="7">Coordinate Difference Table</th>
+                                    </tr>
+                                    <tr>
+                                        <th align="center" ; colspan="1" rowspan="2">Point Name</th>
+                                        <th align="center" ; colspan="3">UTM/TM Coordinate Difference</th>
+                                        <th align="center" ; colspan="3">Topocentric Coordinate Difference</th>
+                                    </tr>
+                                    <tr>
+                                        <th id="farkE">X(cm)</th>
+                                        <th id="farkN">Y(cm)</th>
+                                        <th id="farkh">Z(cm)</th>
+                                        <th id="farkE_topoc">E(cm)</th>
+                                        <th id="farkN_topoc">N(cm)</th>
+                                        <th id="farkU_topoc">U(cm)</th>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <div id="divTableDataHolder_CoorDiff_t3t1">
+                                <!-- Tüm-İz Minimum Deng. - Adjusted Coordinates and Mean Errors -->
+                                <table id="TableDiff_t3t1">
+                                    <tr>
+                                        <th id="farkCapt_t3t1" align="center" ; colspan="7">Coordinate Differences Table (t3-t1)</th>
+                                        <!--Koordinat Fark Tablosu-->
+                                    </tr>
+                                    <tr>
+                                        <th align="center" ; colspan="1" rowspan="2">Point Name</th>
+                                        <th align="center" ; colspan="3">UTM/TM Coordinate Difference</th>
+                                        <th align="center" ; colspan="3">Topocentric Coordinate Difference</th>
+                                    </tr>
+                                    <tr>
+                                        <th id="farkE_t3t1">Easting <sub>(t3-t1)</sub> cm</th>
+                                        <th id="farkN_t3t1">Northing <sub>(t3-t1)</sub> cm</th>
+                                        <th id="farkh_t3t1">h <sub>(t3-t1)</sub> cm</th>
+                                        <th id="farkE_topoc_t3t1">East <sub>(t3-t1)</sub> cm</th>
+                                        <th id="farkN_topoc_t3t1">North <sub>(t3-t1)</sub> cm</th>
+                                        <th id="farkU_topoc_t3t1">Up <sub>(t3-t1)</sub> cm</th>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <div id="divTableDataHolder_CoorDiff_t3t2">
+                                <!-- Tüm-İz Minimum Deng. - Adjusted Coordinates and Mean Errors -->
+                                <table id="TableDiff_t3t2">
+                                    <tr>
+                                        <th id="farkCapt_t3t2" align="center" ; colspan="7">Coordinate Differences Table (t3-t2)</th>
+                                        <!--Koordinat Fark Tablosu-->
+                                    </tr>
+                                    <tr>
+                                        <th align="center" ; colspan="1" rowspan="2">Point Name</th>
+                                        <th align="center" ; colspan="3">UTM/TM Coordinate Difference</th>
+                                        <th align="center" ; colspan="3">Topocentric Coordinate Difference</th>
+                                    </tr>
+                                    <tr>
+                                        <th id="farkE_t3t2">Easting <sub>(t3-t2)</sub> cm</th>
+                                        <th id="farkN_t3t2">Northing <sub>(t3-t2)</sub> cm</th>
+                                        <th id="farkh_t3t2">h <sub>(t3-t2)</sub> cm</th>
+                                        <th id="farkE_topoc_t3t2">East <sub>(t3-t2)</sub> cm</th>
+                                        <th id="farkN_topoc_t3t2">North <sub>(t3-t2)</sub> cm</th>
+                                        <th id="farkU_topoc_t3t2">Up <sub>(t3-t2)</sub> cm</th>
+                                    </tr>
+                                </table>
+                            </div>
+                        </li>
+                        <li>
+                            <h6 style="margin-top: -10px; padding-bottom: 5px;">Velocity Vectors</h6>
+                            <button type="button" id="VelocityVectors" class="btn btn-outline-success" disabled> Draw Velocity Vectors and Error Ellips</button>
+                            <button type="button" id="Velocity_t2t1" class="btn btn-outline-success"> Draw Velocity Vectors and Error Ellips <sub>(t2-t1)</sub></button>
+                            <button type="button" id="Velocity_t3t1" class="btn btn-outline-success"> Draw Velocity Vectors and Error Ellips <sub>(t3-t1)</sub></button>
+                            <button type="button" id="Velocity_t3t2" class="btn btn-outline-success"> Draw Velocity Vectors and Error Ellips <sub>(t3-t2)</sub></button>
+                            <label id="velocity_vectors_t2t1" class="container_baseline" style="margin-top: 10px">Remove Velocity Vectors and Error Ellips (t2-t1)
+                                <input type="checkbox" name="velocity_vectors_t2t1">
+                                <span id="BazGizle_t1" class="checkmark_baseline" name="baseline"></span>
+                            </label>
+                            <label id="velocity_vectors_t3t1" class="container_baseline">Remove Velocity Vectors and Error Ellips (t3-t1)
+                                <input type="checkbox" name="velocity_vectors_t3t1">
+                                <span id="BazGizle_t1" class="checkmark_baseline" name="baseline"></span>
+                            </label>
+                            <label id="velocity_vectors_t3t2" class="container_baseline">Remove Velocity Vectors and Error Ellips (t3-t2)
+                                <input type="checkbox" name="velocity_vectors_t3t2">
+                                <span id="BazGizle_t1" class="checkmark_baseline" name="baseline"></span>
+                            </label>
+                            <script src="src/analysis_script.js"></script>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="src/graph.js"></script>
+    <script src="src/significant_point_test_t2t1.js"></script>
+    <script src="src/significant_point_test_t3t1.js"></script>
+    <script src="src/significant_point_test_t3t2.js"></script>
+
+    <div id="mapwrapper">
+        <div id="map">
+            <span id="OpenNav" onclick="openNav()">☰</span>
+        </div>
+    </div>
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "330px";
+            $("#map").addClass("map-sec");
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0px";
+            $("#map").removeClass("map-sec");
+        }
+    </script>
+
+
+
+
+
+
+
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+        <!-- Nav tabs -->
+        <ul id="navtabs" class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#base_maps">Base Maps</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#country">Country</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#fault_lines">Fault Lines</a>
+            </li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div id="base_maps" class="container tab-pane active"><br>
+                <ul id="ul_1" class="nav flex-column ml-4">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+
+                            <label id="t_haritalar" class="container">Satellite
+                                <input type="radio" name="radio_th" id="uydu-id" value="uydu" checked="checked">
+                                <span class="checkmark"></span>
+                            </label>
+
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+
+                            <label id="t_haritalar" class="container">Hybrid
+                                <input type="radio" name="radio_th" id="hybrid-id" value="hybrid">
+                                <span id="hybrid-id" class="checkmark"></span>
+                            </label>
+
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+
+                            <label id="t_haritalar" class="container">Topographic
+                                <input type="radio" name="radio_th" id="topo-id" value="topo">
+                                <span id="topo-id" class="checkmark"></span>
+                            </label>
+
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+
+                            <label id="t_haritalar" class="container">OpenStreetMap
+                                <input type="radio" name="radio_th" id="osm-id" value="osm">
+                                <span id="osm-id" class="checkmark"></span>
+                            </label>
+
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <label id="t_haritalar" class="container" style="text-align:center">Opacity</label>
+                        </a>
+                        <input type="range" name="opacity" min="0" max="1" step="0.01" value="1" class="slider" id="myRange" onchange="updateOpacity(this.value)">
+                    </li>
+                </ul>
+            </div>
+
+            <div id="country" class="container tab-pane fade"><br>
+                <ul id="ul_1" class="nav flex-column ml-4">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+
+                            <label id="ulke" class="container">Turkey Boundary
+                                <input type="checkbox" name="turkey_sinir" id="ulke_sinir_id" checked="checked">
+                                <span id="ulke_sinir" class="checkmark"></span>
+                            </label>
+
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+
+                            <label id="ulke" class="container">Turkey Province Boundary
+                                <input type="checkbox" name="turkey_il_sinir" id="ulke_il_id">
+                                <span id="ulke_il" class="checkmark"></span>
+                            </label>
+
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+
+                            <label id="ulke" class="container">Turkey District Boundary
+                                <input type="checkbox" name="turkey_ilce_sinir" id="ulke_ilce_id">
+                                <span id="ulke_ilce" class="checkmark"></span>
+                            </label>
+
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+
+            <div id="fault_lines" class="container tab-pane fade"><br>
+                <ul id="ul_1" class="nav flex-column ml-4">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+
+                            <label id="fault" class="container" style="border-bottom: 1px solid;"> Plates
+                                <input type="checkbox" name="plates" id="c_fault-id">
+                                <span id="c_fault" class="checkmark"></span>
+                            </label>
+
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+
+                            <label id="fault" class="container"> Crustal Fault
+                                <input type="checkbox" name="fay_hatti" id="c_fault-id">
+                                <span id="c_fault" class="checkmark"></span>
+                            </label>
+
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+
+                            <label id="fault" class="container" style="border-bottom: 1px solid;"> Crustal Fault Zones
+                                <input type="checkbox" name="fay_hatti_zone" id="c_fault_zone-id">
+                                <span id="c_fault_zones" class="checkmark"></span>
+                            </label>
+
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+
+                            <label id="fault" class="container"> Subduction Contours
+                                <input type="checkbox" name="dalim_kontur" id="s_contours-id">
+                                <span id="s_contours" class="checkmark"></span>
+                            </label>
+
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+
+                            <label id="fault" class="container"> Subduction Zones
+                                <input type="checkbox" name="dalim_bolge" id="s_zones-id">
+                                <span id="s_zones" class="checkmark"></span>
+                            </label>
+
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</body></html>
+
+<script src="leaflet_search/src/leaflet-search.js"></script>
+<script src="leaflet_search/data/us-states.js"></script>
+
+<!--<script src="leaflet_adress_search/src/leaflet-search.js"></script> -->
+
+<script src="https://unpkg.com/togeojson@0.14.2"></script>
+<script src="file_layer/leaflet.filelayer.js"></script>
+
+<script src="locate/src/L.Control.Locate.js"></script>
+
+<script src="https://unpkg.com/leaflet.markercluster@1.3.0/dist/leaflet.markercluster.js"></script>
+
+<script src="print/src/leaflet.browser.print.js"></script>
+<script src="print/src/leaflet.browser.print.utils.js"></script>
+<script src="print/src/leaflet.browser.print.sizes.js"></script>
+<script src="src/geojson/turkey.js"></script>
+<script src="src/geojson/turkey_il.js"></script>
+<script src="src/geojson/turkey_ilce.js"></script>
+<script src="src/geojson/plates.js"></script>
+<script src="src/geojson/crustal_fault.js"></script>
+<script src="src/geojson/crustal_fault_zones.js"></script>
+<script src="src/geojson/subduction_contours.js"></script>
+<script src="src/geojson/subduction_zones.js"></script>
+<script src="src/geojson/mahalle_sinirlari.js"></script>
+<script src="src/deformation_analysis_js.js"></script>
+
+<script src="src/session1_after_body_script.js"></script>
