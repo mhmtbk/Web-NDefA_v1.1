@@ -1,0 +1,5 @@
+leaflet.draw.css
+leaflet-src.js
+leaflet.draw.js
+
+tooltip yazıları ve boyut vs. için yukarıdaki dosyalardan düzenlemeler yapılabilir.
