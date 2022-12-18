@@ -1,5 +1,5 @@
 # Web-NDefA: Web-'N'etwork 'Def'ormation 'A'nalysis
-The Web-NDefA is a web-based open-source platform developed for the determination of deformations in univariate geodetic networks, which are periodically monitored with GNSS observations, with static model and S-Transformation matrix method for easy access to GNSS-based deformation analysis studies. Through this platform, it is possible to detect crustal and landslides movements, determine ground collapses and identify deformations in engineering structures.<br/><br/>
+The Web-NDefA is a web-based open-source platform developed for the determination of deformations in univariate geodetic networks, which are periodically monitored with GNSS observations, with static model and S-Transformation matrix method for easy access to GNSS-based deformation analysis studies. Through this platform, it is possible to detect crustal and landslides movements, determine ground collapses and identify deformations in engineering structures. Thus, this platform provides an alternative solution for fast, simple and visual determination of deformations in geodetic GNSS networks.<br/><br/>
 It was created with *HTML, CSS, and Client Side JavaScript*. JavaScript, one of the core technologies of web development, is a flexible and powerful programming language. Since the basic functions of the Web-NDefA platform are built with JavaScript, the enhancement and manipulation of web pages and client browsers is provided.<br/><br/>
 This platform can also be accessed at [webndefa.com](https://www.webndefa.com/).
 
@@ -29,8 +29,5 @@ In the last section, the Web-NDefA platform statistically determines whether the
 
 For a sample deformation analysis application, GNSS observations for the periods 05 October 2016 (GPS Day 279 and filename: 2016_2) and 01 October 2019 (GPS Day 274 and file name: 2019_2) in the "BaselineSolutionFiles" folder can be used. GNSS observations are daily data of 13 stations acquiring from national and international Continuously Working Reference Networks (IGS, CORS-TR and ISKI-CORS) on the Gulf of Izmit and its vicinity on the North Anatolian Fault.
 
-
-
-
-
+A sample application on the Web-NDefA platform can be found in this [video](https://drive.google.com/file/d/1AnLgI6StlwMz9vwiXFngdniBkO5PAGYk/view?usp=share_link).
 
